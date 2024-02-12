@@ -8,24 +8,33 @@
     <link rel="stylesheet" href="css/main.css">
     <script defer src="js/vue.js"></script>
     <script defer src="js/main.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&family=Teko:wght@300&display=swap');
+    </style>
+
     <title>Product App</title>
 </head>
 <body>
 <div id="app">
-
     <div class="product">
         <div class="product-image">
             <img :src="image" :alt="altText"/>
         </div>
         <div class="product-info">
             <h1>{{ product }}</h1>
-            <p v-if="inventory > 10">In stock</p>
-            <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-            <p v-else>Out of stock</p>
-            <p v-show="onSale">On sale!</p>
+            <p v-if="inStock">In stock</p>
+            <p v-else>Out of Stock</p>
+            <ul>
+                <li v-for="detail in details">{{ detail }}</li>
+            </ul>
+            <div v-for="variant in variants" :key="variant.variantId">
+                <p>{{ variant.variantColor }}</p>
+            </div>
+            <ul>
+                <li v-for="sizes in sizes">{{ sizes }}</li>
+            </ul>
         </div>
     </div>
-
 </div>
 </body>
 </html>
